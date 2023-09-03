@@ -5,15 +5,29 @@ import time
 # Número de veces que deseas enviar el mensaje con imagen
 num_envios = 5
 
-chromeOptions = webdriver.ChromeOptions()
-chromeOptions.add_argument("--user-data-dir=C:\\Users\\USER\\AppData\\Local\\Google\\Chrome\\User Data")
-chromeOptions.add_argument("--profile-directory=Default")
-# Iniciar el navegador (asegúrate de tener el controlador de WebDriver correspondiente)
-driver = webdriver.Chrome(options=chromeOptions)
 
+# Iniciar el navegador (asegúrate de tener el controlador de WebDriver correspondiente)
+driver = webdriver.Chrome()
+
+#--------------------CREAR UN ARCHIVO TXT PARA GUARDAR COOKIES--------------------------------
+archivo = 'contra.txt'
+try:
+    with open(archivo, "w") as archivo:
+        
+        pass
+    
+        # Puedes agregar más contenido aquí si lo deseas
+    
+except IOError as e:
+    print(f"No se pudo crear el archivo '{archivo}': {e}")
 # Abre WhatsApp Web
 driver.get("https://web.whatsapp.com/")
+
 time.sleep(15)  # Espera a que cargue WhatsApp Web
+cookies = driver.get_cookies()
+archivo_nombre = 'contra.txt'
+with open(archivo_nombre,"a") as archivo_nombre:
+    archivo_nombre.write(str(cookies))
 
 # Función para enviar un mensaje con imagen
 def enviar_mensaje_con_imagen(contacto, mensaje, imagen_path):

@@ -5,8 +5,11 @@ import time
 # Número de veces que deseas enviar el mensaje con imagen
 num_envios = 5
 
+chromeOptions = webdriver.ChromeOptions()
+chromeOptions.add_argument("--user-data-dir=C:\\Users\\USER\\AppData\\Local\\Google\\Chrome\\User Data")
+chromeOptions.add_argument("--profile-directory=Default")
 # Iniciar el navegador (asegúrate de tener el controlador de WebDriver correspondiente)
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(options=chromeOptions)
 
 # Abre WhatsApp Web
 driver.get("https://web.whatsapp.com/")

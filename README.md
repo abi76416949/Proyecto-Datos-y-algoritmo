@@ -1,2 +1,3 @@
 # Diagrama de secuencia
-Automatización de mensajes.
+Automatización
+d

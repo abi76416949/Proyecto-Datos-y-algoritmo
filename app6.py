@@ -11,7 +11,7 @@ pyautogui.press('enter')
 
 # Espera a que el navegador se abra (ajusta el tiempo según la velocidad de tu sistema)51997322971
 
-time.sleep(5)
+time.sleep(1)
 
 # Abre WhatsApp Web (ajusta las coordenadas según tu resolución de pantalla)
 #pyautogui.click(x=500, y=500)  # Reemplaza estas coordenadas con las correctas
@@ -24,11 +24,15 @@ pyautogui.press('enter')
 time.sleep(10)
 
 # Ingresa el número de teléfono y el mensaje
-pyautogui.write("51997322971")
+pyautogui.write("tevis es gei")
 pyautogui.press('enter')
 time.sleep(2)
+ruta_de_imagen = "./gato.png"  # Reemplaza con la ruta de tu imagen
+pyautogui.write(ruta_de_imagen)
+pyautogui.press('enter')
 pyautogui.write("Mensaje de prueba")
 pyautogui.press('enter')
+pyautogui.write("C:\\ruta\\a\\tu\\imagen.png")
 
 # Realiza un clic en una posición específica en la pantalla (por ejemplo, x=600, y=600)
 pyautogui.click(x=600, y=600)

@@ -27,12 +27,12 @@ time.sleep(10)
 pyautogui.write("tevis es gei")
 pyautogui.press('enter')
 time.sleep(2)
-ruta_de_imagen = "./gato.png"  # Reemplaza con la ruta de tu imagen
+ruta_de_imagen = './gato.png'  # Reemplaza con la ruta de tu imagen
 pyautogui.write(ruta_de_imagen)
 pyautogui.press('enter')
 pyautogui.write("Mensaje de prueba")
 pyautogui.press('enter')
-pyautogui.write("C:\\ruta\\a\\tu\\imagen.png")
+
 
 # Realiza un clic en una posición específica en la pantalla (por ejemplo, x=600, y=600)
 pyautogui.click(x=600, y=600)

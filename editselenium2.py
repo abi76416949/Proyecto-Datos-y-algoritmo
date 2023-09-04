@@ -21,7 +21,7 @@ try:
 except IOError as e:
     print(f"No se pudo crear el archivo '{archivo}': {e}")
 # Abre WhatsApp Web
-driver.get("./gato.png")
+driver.get("https://web.whatsapp.com/")
 
 time.sleep(15)  # Espera a que cargue WhatsApp Web
 cookies = driver.get_cookies()

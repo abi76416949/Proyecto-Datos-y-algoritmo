@@ -38,6 +38,6 @@ pyautogui.press('enter')
 pyautogui.click(x=600, y=600)
 
 # Cierra el navegador (ajusta las coordenadas según tu resolución de pantalla)
-pyautogui.hotkey('alt', 'f4')
+#pyautogui.hotkey('alt', 'f4')
 
 # Puedes agregar más acciones de PyAutoGUI según tus necesidades

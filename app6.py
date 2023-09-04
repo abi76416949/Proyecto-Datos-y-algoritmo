@@ -16,7 +16,8 @@ time.sleep(5)
 # Abre WhatsApp Web (ajusta las coordenadas según tu resolución de pantalla)
 #pyautogui.click(x=500, y=500)  # Reemplaza estas coordenadas con las correctas
 pyautogui.hotkey('ctrl','l')
-pyautogui.write("https://web.whatsapp.com/")
+numero_telefono = '51997322971 '
+pyautogui.write(f"https://web.whatsapp.com/send?phone={numero_telefono}")
 pyautogui.press('enter')
 
 # Espera a que se cargue WhatsApp Web (ajusta el tiempo según la velocidad de tu sistema)

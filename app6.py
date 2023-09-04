@@ -9,13 +9,16 @@ time.sleep(1)
 pyautogui.write("chrome")
 pyautogui.press('enter')
 
-# Espera a que el navegador se abra (ajusta el tiempo según la velocidad de tu sistema)
+# Espera a que el navegador se abra (ajusta el tiempo según la velocidad de tu sistema)51997322971
+
 time.sleep(5)
 
 # Abre WhatsApp Web (ajusta las coordenadas según tu resolución de pantalla)
 #pyautogui.click(x=500, y=500)  # Reemplaza estas coordenadas con las correctas
-pyautogui.hotkey('ctrl','e')
+pyautogui.hotkey('ctrl','l')
 pyautogui.write("https://web.whatsapp.com/")
+pyautogui.press('enter')
+
 # Espera a que se cargue WhatsApp Web (ajusta el tiempo según la velocidad de tu sistema)
 time.sleep(10)
 

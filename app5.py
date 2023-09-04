@@ -14,7 +14,7 @@ import time
 options = Options()
 numero_telefono = "51997322971"
 options = webdriver.ChromeOptions()
-#options.add_argument(r"--user-data-dir=C:\Users\USER\AppData\Local\Google\Chrome\User Data")
+options.add_argument(r"--user-data-dir=C:\Users\USER\AppData\Local\Google\Chrome\User Data")
 #options.add_argument("--profile-directory=Default")
 driver = webdriver.Chrome(options=options)
 

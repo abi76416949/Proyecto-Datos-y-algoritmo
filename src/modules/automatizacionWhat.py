@@ -13,11 +13,11 @@ options = Options()
 
 options = webdriver.ChromeOptions()
 #options.add_argument("--user-data-dir=./driver/data3")
-options.add_argument('--headless')
+#options.add_argument('--headless')
 options.add_argument("--user-data-dir=C:\\Users\\USER\\AppData\\Local\\Google\\Chrome SxS\\User Data")
 options.add_argument("--profile-directory=Default")
 driver = webdriver.Chrome(options=options) 
-
+print("se logro ejecutar el script")
 
 #.........................FUNCION PARA ENVIAR IMAGEN..........................
 def enviarImagen(ruta_imagen):
@@ -68,7 +68,7 @@ def enviarMensaje(numero_telefono,nombre):
     wait.until(EC.presence_of_element_located((By.TAG_NAME, 'footer')))
 
 
-    mensaje = " Felicidades"
+    mensaje = f" Felicidades es tu cumpleaños {nombre}"
 
     #get in footer
 
@@ -83,8 +83,8 @@ def enviarMensaje(numero_telefono,nombre):
     print(f"Mensaje enviado a {numero_telefono}: {mensaje}")
 
 def botWhatsapp(numero, rutaImagen,nombre):
-  
-   
+    time.sleep(3)
+    print("se envia el mensaje")
     enviarMensaje(numero,nombre)
     enviarImagen(rutaImagen)
     #time.sleep(4)

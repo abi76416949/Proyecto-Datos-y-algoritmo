@@ -15,22 +15,7 @@ usuarios = {
     "ABIGAIL": "333"
 }
 
-# Función para verificar la autenticación
-def iniciar_sesion():
-    usuario_ingresado = entry_usuario.get()
-    contrasena_ingresada = entry_contrasena.get()
 
-    resultado_label.configure(text="Iniciando sesión...")  # Muestra un mensaje de carga
-    root.update() #Actualiza la interfaz
-
-    #Tiempo de carga
-    root.update() 
-    time.sleep(3)
-
-    if usuario_ingresado in usuarios and contrasena_ingresada == usuarios[usuario_ingresado]:
-        resultado_label.configure(text="Inicio de sesión exitoso para {}".format(usuario_ingresado))
-    else:
-        resultado_label.configure(text="Inicio de sesión fallido. Verifica tus credenciales.")
 
 
 c_negro = '#010101'

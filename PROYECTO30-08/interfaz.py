@@ -8,7 +8,6 @@ usuarios = {
     "TEVIS": "222",
     "ABIGAIL": "333"
 }
-
 # Función para verificar la autenticación
 def iniciar_sesion():
     usuario_ingresado = entry_usuario.get()
@@ -39,6 +38,7 @@ root.title('Inicio de sesion')
 
 #Ruta de la imagen
 logo = PhotoImage(file='images/logo.png')
+
 
 frame = CTkFrame(root, fg_color=c_negro)
 frame.grid(column=0, row=0, sticky='nsew', padx=50, pady=50)

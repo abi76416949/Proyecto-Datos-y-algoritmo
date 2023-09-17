@@ -1,7 +1,6 @@
 from customtkinter import CTk, CTkFrame, CTkEntry, CTkLabel, CTkButton
 from tkinter import PhotoImage
 import time
-from tkinter import Label as CTkLabel
 
 
 # Define los usuarios y contraseñas válidos en un diccionario
@@ -70,7 +69,6 @@ bt_iniciar = CTkButton(frame, font=('sans serif', 12), border_color=c_verde, fg_
 bt_iniciar.grid(columnspan=2, row=3, pady=4, padx=4)
 
 # Etiqueta para mostrar el resultado
-resultado_label = CTkLabel(frame, font=('sans serif', 12), fg_color=c_negro)
 resultado_label.grid(columnspan=2, row=5, pady=4, padx=4)
 root.call('wm', 'iconphoto', root._w, logo)
 

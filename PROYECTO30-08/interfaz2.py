@@ -1,6 +1,8 @@
 from customtkinter import CTk, CTkFrame, CTkEntry, CTkLabel, CTkButton
 from tkinter import PhotoImage
 import time
+from tkinter import Label as CTkLabel
+
 
 # Define los usuarios y contraseñas válidos en un diccionario
 usuarios = {

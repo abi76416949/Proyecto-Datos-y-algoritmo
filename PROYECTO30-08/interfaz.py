@@ -1,10 +1,6 @@
-from customtkinter import CTk, CTkFrame, CTkEntry, CTkLabel, CTkButton
-from tkinter import PhotoImage
+from customtkinter import CTk, CTkFrame, CTkEntry, CTkButton
+from tkinter import PhotoImage, Label as CTkLabel
 import time
-import tkinter as tk
-
-
-#----------------------FUNCION PARA INGRESAR------------------------------
 
 # Define los usuarios y contraseñas válidos en un diccionario
 usuarios = {
@@ -19,28 +15,29 @@ def iniciar_sesion():
     contrasena_ingresada = entry_contrasena.get()
 
     resultado_label.configure(text="Iniciando sesión...")  # Muestra un mensaje de carga
-    root.update() # Actualiza la interfaz
+    root.update() #Actualiza la interfaz
 
-    # Simula un tiempo de carga
-    root.update
-    time.sleep(2)
+    #Tiempo de carga
+    root.update() 
+    time.sleep(3)
 
     if usuario_ingresado in usuarios and contrasena_ingresada == usuarios[usuario_ingresado]:
         resultado_label.configure(text="Inicio de sesión exitoso para {}".format(usuario_ingresado))
     else:
         resultado_label.configure(text="Inicio de sesión fallido. Verifica tus credenciales.")
 
+
 c_negro = '#010101'
 c_morado = "#7f5af0"
 c_verde = "#2cb67d"
 
 root = CTk()
-root.geometry('500x600+350+20')  # Tamaño de la pantalla
+root.geometry('500x600+350+20')  #Tamño de la pantalla
 root.minsize(480, 500)
 root.config(bg=c_negro)
 root.title('Inicio de sesion')
 
-# Ruta de la imagen
+#Ruta de la imagen
 logo = PhotoImage(file='images/logo.png')
 
 frame = CTkFrame(root, fg_color=c_negro)
@@ -71,12 +68,14 @@ bt_iniciar = CTkButton(frame, font=('sans serif', 12), border_color=c_verde, fg_
 bt_iniciar.grid(columnspan=2, row=3, pady=4, padx=4)
 
 # Etiqueta para mostrar el resultado
-resultado_label = CTkLabel(frame, font=('sans serif', 12), fg_color=c_negro)
+resultado_label = CTkLabel(frame, font=('sans serif', 12))
+resultado_label.configure(fg=c_negro)  # Establecer el color de fuente
 resultado_label.grid(columnspan=2, row=5, pady=4, padx=4)
 root.call('wm', 'iconphoto', root._w, logo)
 
 # Ejecutar la aplicación
 root.mainloop()
+
 
 
 

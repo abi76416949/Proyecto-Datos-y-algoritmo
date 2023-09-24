@@ -1,6 +1,13 @@
-from registro_persona import RegistroPersona
-from persona import Persona
+from src.modules.persona import Persona
 from tkinter import *
+from src.modules.registro_persona import RegistroPersona
+
+
+
+
+
+
+#---------------------Interfaz con Tkinder-------------------------------------
 # DANDO NOMBRES DE LOS OBJETOS
 registro = RegistroPersona()
 

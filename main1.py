@@ -4,7 +4,6 @@ from registro_persona import RegistroPersona
 from persona import Persona
 from base_de_datos import BaseDeDatos
 from enviarCorreo import EnviadorDeCorreos
-
 def main():
     registro = RegistroPersona()
     enviador_de_correos = EnviadorDeCorreos('trabajosgrupalesdelcole@gmail.com', 'dysa uxym osmb wuci')
@@ -46,7 +45,7 @@ def main():
                     enviador_de_correos.enviar_correo(correo, "Registro exitoso", "Has sido registrado exitosamente.")
                     break
                 else:
-                    print("La verificación del correo ha fallado. Por favor, intenta ingresar un correo valido de nuevo.")
+                    print(f"La verificación del correo {correo} ha fallado. Por favor, intenta ingresar un correo valido de nuevo.")
                       
                     
 

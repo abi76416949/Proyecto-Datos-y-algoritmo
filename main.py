@@ -7,7 +7,7 @@ from enviarCorreo import EnviadorDeCorreos
 
 def main():
     registro = RegistroPersona()
-    enviador_de_correos = EnviadorDeCorreos('trabajosgrupalesdelcole@gmail.com', 'trabajosgrupales')
+    enviador_de_correos = EnviadorDeCorreos('trabajosgrupalesdelcole@gmail.com', 'dysa uxym osmb wuci')
 
     # Menu principal
     while True:

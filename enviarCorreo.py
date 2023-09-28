@@ -30,7 +30,7 @@ class EnviadorDeCorreos:
     def verificar_correo(self, email_receptor):
         """Envía un código de verificación al correo del receptor y espera su confirmación."""
         codigo_verificacion = self.generar_codigo_verificacion()
-        print(f"Enviando correo a {email_receptor} con código {codigo_verificacion}")
+        print(f"Enviando correo a {email_receptor} ")
         try:
             self.enviar_correo(email_receptor, "Código de verificación", f"Tu código de verificación es {codigo_verificacion}")
         except Exception as e:

@@ -17,6 +17,7 @@ class BaseDeDatos:
         except FileNotFoundError:
             return []
 
+
     def guardar_datos(self, datos):
         wb = Workbook()
         sheet = wb.active
@@ -24,6 +25,8 @@ class BaseDeDatos:
         for persona in datos:
             sheet.append([persona['nombre'], persona['codigo'], persona['edad'], persona['correo'], persona['numero'], persona['genero'], persona['fecha_nacimiento']])
         wb.save(self.archivo)
+
+
 
     def cerrar(self):
         pass

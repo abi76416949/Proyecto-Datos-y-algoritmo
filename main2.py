@@ -1,20 +1,19 @@
 import sys
 sys.path.append('.\src\modules')
-
-# Importar las clases necesarias desde módulos personalizados
 from registro_persona import RegistroPersona
 from persona import Persona
 from base_de_datos import BaseDeDatos
 from enviarCorreo import EnviadorDeCorreos
 
 def main():
-    # Crear una instancia de RegistroPersona
-    registro = RegistroPersona()
 
-    # Crear una instancia de EnviadorDeCorreos con las credenciales de Gmail
+    # Crear una instancia de BaseDeDatos
+    base_de_datos = BaseDeDatos('personas.xlsx')
+
+    registro = RegistroPersona()
     enviador_de_correos = EnviadorDeCorreos('trabajosgrupalesdelcole@gmail.com', 'eqnclstodvineoub')
 
-    # Menú principal
+    # Menu principal
     while True:
         print("\nMenú:")
         print("1. Agregar persona")
@@ -26,13 +25,13 @@ def main():
         opcion = input("Seleccione una opción: ")
         
         if opcion == "1":
-            # Solicitar datos al usuario para crear una Persona
+            # Solicitar datos al usuario
             nombre = input("Nombre y apellido: ")
             edad = int(input("Edad: "))
             codigo = input("Codigo: ")
             correo = input("Correo electrónico (sin @gmail.com): ")
             
-            op_correo = input("¿Qué tipo de correo usa? (1)gmail (2)hotmail (3)yahoo: ")
+            op_correo = input("que tipo de correo usa? (1)gmail (2)hotmail (3)yahoo: ")
             if op_correo == "1":
                 correo = correo + "@gmail.com"
             if op_correo == "2":
@@ -40,27 +39,30 @@ def main():
             if op_correo == "3":
                 correo = correo + "@yahoo.com" 
             numero = input("Número de teléfono: ")
-            genero = input("Género(F/M): ")
+            genero = input("Genero(F/M): ")
             fecha_nacimiento = input("Fecha de nacimiento(dd/mm/aaaa): ")
 
-            # Crear un objeto Persona con los datos ingresados
+            # Crear objeto Persona
             persona = Persona(nombre, codigo, edad, correo, numero, genero, fecha_nacimiento)
 
             # Agregar persona al registro
             registro.agregar_persona(persona)
 
+            # Luego, guardar la persona en la base de datos utilizando la clase BaseDeDatos
+            base_de_datos.guardar_datos([persona])
+
             # Enviar correo electrónico a la persona recién registrada
             enviador_de_correos.enviar_correo(correo, "Registro exitoso", "Has sido registrado exitosamente.")
 
         elif opcion == "2":
-            codigo = input("Ingrese el código de la persona a eliminar: ")
+            codigo = input("Ingrese el codigo de la persona a eliminar: ")
             registro.eliminar_persona(codigo)
 
         elif opcion == "3":
             registro.mostrar_personas()
 
         elif opcion == "4":
-            codigo = input("Ingrese el código de la persona a buscar: ")
+            codigo = input("Ingrese el codigo de la persona a buscar: ")
             registro.buscar_persona_por_codigo(codigo)
 
         elif opcion == "5":
@@ -72,4 +74,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

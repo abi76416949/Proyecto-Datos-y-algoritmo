@@ -7,7 +7,7 @@ from enviarCorreo import EnviadorDeCorreos
 
 def main():
     registro = RegistroPersona()
-    enviador_de_correos = EnviadorDeCorreos('trabajosgrupalesdelcole@gmail.com', 'eqnclstodvineoub')
+    enviador_de_correos = EnviadorDeCorreos('trabajosgrupalesdelcole@gmail.com', 'trabajosgrupales')
 
     # Menu principal
     while True:
@@ -21,31 +21,39 @@ def main():
         opcion = input("Seleccione una opción: ")
         
         if opcion == "1":
-            # Solicitar datos al usuario
-            nombre = input("Nombre y apellido: ")
-            edad = int(input("Edad: "))
-            codigo = input("Codigo: ")
-            correo = input("Correo electrónico (sin @gmail.com): ")
-            
-            op_correo = input("que tipo de correo usa? (1)gmail (2)hotmail (3)yahoo: ")
-            if op_correo == "1":
-                correo = correo + "@gmail.com"
-            if op_correo == "2":
-                correo = correo + "@hotmail.com"
-            if op_correo == "3":
-                correo = correo + "@yahoo.com" 
-            numero = input("Número de teléfono: ")
-            genero = input("Genero(F/M): ")
-            fecha_nacimiento = input("Fecha de nacimiento(dd/mm/aaaa): ")
+            while True:
+                # Solicitar datos al usuario
+                nombre = input("Nombre y apellido: ")
+                edad = int(input("Edad: "))
+                codigo = input("Codigo: ")
+                correo = input("Correo electrónico (sin @gmail.com): ")
+                
+                op_correo = input("que tipo de correo usa? (1)gmail (2)hotmail (3)yahoo: ")
+                if op_correo == "1":
+                    correo = correo + "@gmail.com"
+                if op_correo == "2":
+                    correo = correo + "@hotmail.com"
+                if op_correo == "3":    
+                    correo = correo + "@yahoo.com" 
+                numero = input("Número de teléfono: ")
+                genero = input("Genero(F/M): ")
+                fecha_nacimiento = input("Fecha de nacimiento(dd/mm/aaaa): ")
 
-            # Crear objeto Persona
-            persona = Persona(nombre, codigo, edad, correo, numero, genero, fecha_nacimiento)
+                # Verificar correo electrónico
+                if enviador_de_correos.verificar_correo(correo):
+                    print("Correo verificado exitosamente.")
+                    
+                    # Crear objeto Persona
+                    persona = Persona(nombre, codigo, edad, correo, numero, genero, fecha_nacimiento)
 
-            # Agregar persona al registro
-            registro.agregar_persona(persona)
+                    # Agregar persona al registro
+                    registro.agregar_persona(persona)
 
-            # Enviar correo electrónico a la persona recién registrada
-            enviador_de_correos.enviar_correo(correo, "Registro exitoso", "Has sido registrado exitosamente.")
+                    # Enviar correo electrónico a la persona recién registrada
+                    enviador_de_correos.enviar_correo(correo, "Registro exitoso", "Has sido registrado exitosamente.")
+                    break
+                else:
+                    print("La verificación del correo ha fallado. Por favor, intenta de nuevo.")
 
         elif opcion == "2":
             codigo = input("Ingrese el codigo de la persona a eliminar: ")

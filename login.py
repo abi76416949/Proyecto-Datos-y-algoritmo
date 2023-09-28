@@ -7,8 +7,8 @@ from PyQt5.QtGui import QDesktopServices
 app = QtWidgets.QApplication([])
 #Cargar archivos
 
-login = uic.loadUi("G:\Proyecto final\Proyecto-Datos-y-algoritmo\images\diseñofeliciaciones\login.ui")
-menu = uic.loadUi("G:\Proyecto final\Proyecto-Datos-y-algoritmo\images\diseñofeliciaciones\menu.ui")
+login = uic.loadUi("C:\GitHub\Proyecto-Datos-y-algoritmo\images\diseñofeliciaciones\login.ui")
+menu = uic.loadUi("C:\GitHub\Proyecto-Datos-y-algoritmo\images\diseñofeliciaciones\menu.ui")
 
 # En el manejador de eventos del botón (por ejemplo, dentro de una función)
 def abrir_url():

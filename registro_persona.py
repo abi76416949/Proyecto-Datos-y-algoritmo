@@ -17,6 +17,7 @@ class RegistroPersona:
             self.personas = []
 
     #funcion para agregar una persona al registro
+
     def agregar_persona(self, persona):
         try:
             wb = openpyxl.load_workbook('personas.xlsx')
@@ -24,8 +25,8 @@ class RegistroPersona:
         except FileNotFoundError:
             wb = Workbook()
             sheet = wb.active
-            sheet.append(['Nombre', 'Codigo', 'Edad', 'Correo', 'Número', 'Género', 'Fecha de Nacimiento'])
-        sheet.append([persona.nombre, persona.codigo, persona.edad, persona.correo, persona.numero, persona.genero, persona.fecha_nacimiento])
+            sheet.append(['Nombre', 'Codigo', 'Edad', 'Número', 'Género', 'Fecha de Nacimiento', 'Correo'])
+        sheet.append([persona.nombre, persona.codigo, persona.edad, persona.numero, persona.genero, persona.fecha_nacimiento, persona.correo])
         wb.save('personas.xlsx')
         self.personas.append(persona)
         print("Persona agregada exitosamente.")
@@ -43,9 +44,9 @@ class RegistroPersona:
     #funcion para mostrar las personas del registro
     def mostrar_personas(self):
         table = PrettyTable()
-        table.field_names = ["Nombre", "Codigo", "Edad", "Correo", "Número", "Género", "Fecha de Nacimiento"]
+        table.field_names = ["Nombre", "Codigo", "Edad", "Número", "Género", "Fecha de Nacimiento", "Correo"]
         for persona in self.personas:
-            table.add_row([persona.nombre, persona.codigo, persona.edad, persona.correo, persona.numero, persona.genero, persona.fecha_nacimiento])
+            table.add_row([persona.nombre, persona.codigo, persona.edad, persona.numero, persona.genero, persona.fecha_nacimiento, persona.correo])
         print(table)
 
     #funcion para buscar una persona en el registro por codigo
@@ -54,7 +55,7 @@ class RegistroPersona:
         if personas_encontradas:
             for persona in personas_encontradas:
                 print("Persona encontrada:")
-                print(f"Nombre: {persona.nombre}\nCodigo: {persona.codigo}\nEdad: {persona.edad}\nCorreo: {persona.correo}\nNúmero: {persona.numero}\nGénero: {persona.genero}\nFecha de Nacimiento: {persona.fecha_nacimiento}\n")
+                print(f"Nombre: {persona.nombre}\nCodigo: {persona.codigo}\nEdad: {persona.edad}\nNúmero: {persona.numero}\nGénero: {persona.genero}\nFecha de Nacimiento: {persona.fecha_nacimiento}\nCorreo: {persona.correo}\n")
         else:
             print(f"No se encontró a {codigo} en el registro.")
 
@@ -64,8 +65,36 @@ class RegistroPersona:
         sheet = wb.active
         for row in sheet.iter_rows(values_only=True):
             if row[0] == nombre:
-                print(f"Nombre: {row[0]}\nCodigo: {row[1]}\nEdad: {row[2]}\nCorreo: {row[3]}\nNúmero: {row[4]}\nGénero: {row[5]}\nFecha de Nacimiento: {row[6]}\n")
+                print(f"Nombre: {row[0]}\nCodigo: {row[1]}\nEdad: {row[2]}\nNúmero: {row[3]}\nGénero: {row[4]}\nFecha de Nacimiento: {row[5]}\nCorreo: {row[6]}\n")
                 break
         else:
             print(f"No se encontró a {nombre} en el registro.")
 
+
+    # funcion para editar una persona del registro por codigo
+    def editar_persona_por_codigo(self, codigo):
+        personas_encontradas = [persona for persona in self.personas if persona.codigo == codigo]
+        if personas_encontradas:
+            for persona in personas_encontradas:
+                print("Persona encontrada:")
+                print(f"Nombre: {persona.nombre}\nCodigo: {persona.codigo}\nEdad: {persona.edad}\nNúmero: {persona.numero}\nGénero: {persona.genero}\nFecha de Nacimiento: {persona.fecha_nacimiento}\nCorreo: {persona.correo}\n")
+                print("Ingrese los nuevos datos de la persona:")
+                nombre = input("Nombre y apellido: ")
+                edad = int(input("Edad: "))
+                codigo = input("Codigo: ")
+                numero = input("Número de teléfono: ")
+                genero = input("Genero(F/M): ")
+                fecha_nacimiento = input("Fecha de nacimiento(dd/mm/aaaa): ")
+                correo = input("Correo electrónico: ")
+                persona.nombre = nombre
+                persona.edad = edad
+                persona.codigo = codigo
+                persona.numero = numero
+                persona.genero = genero
+                persona.fecha_nacimiento = fecha_nacimiento
+                persona.correo = correo
+                self.bd.guardar_datos([persona.__dict__ for persona in self.personas])
+                print("Persona editada exitosamente.")
+                break
+        else:
+            print(f"No se encontró a {codigo} en el registro.")

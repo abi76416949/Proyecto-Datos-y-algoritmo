@@ -15,7 +15,8 @@ def main():
         print("2. Eliminar persona")
         print("3. Mostrar personas")
         print("4. Buscar persona")
-        print("5. Salir")
+        print("5. Editar persona")
+        print("6. Salir")
 
         opcion = input("Seleccione una opción: ")
         
@@ -59,8 +60,12 @@ def main():
         elif opcion == "4":
             codigo = input("Ingrese el codigo de la persona a buscar: ")
             registro.buscar_persona_por_codigo(codigo)
-
+            
         elif opcion == "5":
+            codigo = input("Ingrese el codigo de la persona a editar: ")    
+            registro.editar_persona_por_codigo(codigo)
+
+        elif opcion == "6":
             print("Saliendo del programa...")
             break
 

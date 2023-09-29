@@ -44,17 +44,11 @@ class EnviadorDeCorreos:
         db = BaseDeDatos('personas.xlsx')
         while True:
             ahora = datetime.now()
-            if ahora.hour == 16:  # Comprueba si son las 16:00 horas
-                destinatarios = db.obtener_datos()
-                for destinatario in destinatarios:
-                    fecha_nacimiento = datetime.strptime(destinatario['fecha_nacimiento'], '%d/%m/%Y')
-                    if fecha_nacimiento.month == ahora.month and fecha_nacimiento.day == ahora.day:
-                        email_receptor = destinatario['correo']
-                        if destinatario['sexo'] == 'f':
-                            self.enviar_correo(email_receptor, "Feliz cumpleaños", "Feliz cumpleaños, señorita!")
-                        else:
-                            self.enviar_correo(email_receptor, "Feliz cumpleaños", "Feliz cumpleaños, señor!")
-                        print(f"Correo enviado a {email_receptor} en {ahora}")
-                time.sleep(60*60)  # dormir durante una hora
-            else:
-                time.sleep(60*60)  # dormir durante una hora
+            destinatarios = db.obtener_datos()
+            for destinatario in destinatarios:
+                fecha_nacimiento = datetime.strptime(destinatario['fecha_nacimiento'], '%d/%m/%Y')
+                if fecha_nacimiento.month == ahora.month and fecha_nacimiento.day == ahora.day:
+                    email_receptor = destinatario['correo']
+                    self.enviar_correo(email_receptor, "Feliz cumpleaños", "Feliz cumpleaños")
+                    print(f"Correo enviado a {email_receptor} en {ahora}")
+            time.sleep(60*60*24) # dormir durante un día

@@ -146,6 +146,7 @@ class MiApp(QtWidgets.QMainWindow):
 		nueva_informacion = {'nombre': nombre, 'edad': edad, 'correo': correo, 'numero': telefono, 'genero': genero, 'fecha_nacimiento': nacimiento}
 		self.registro.editar_persona(codigo, nueva_informacion)
 		self.ui.label_20.setText("Persona editada exitosamente")
+	
 	def eliminar_persona(self):
 		codigo = self.ui.lineEdit_17ingresarcodigoeliminar.text()
 		self.registro.eliminar_persona(codigo)

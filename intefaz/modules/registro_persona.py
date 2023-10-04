@@ -8,7 +8,7 @@ from openpyxl import Workbook
 class RegistroPersona:
     #funcion para inicializar el registro
     def __init__(self):
-        self.bd = BaseDeDatos('personas.xlsx')
+        self.bd = BaseDeDatos('G:\Proyecto final\Proyecto-Datos-y-algoritmo\intefaz\personas.xlsx')
         self.bd.cerrar()
         datos = self.bd.obtener_datos()
         if isinstance(datos, list) and all(isinstance(d, dict) for d in datos):
@@ -19,7 +19,7 @@ class RegistroPersona:
     #funcion para agregar una persona al registro
     def agregar_persona(self, persona):
         try:
-            wb = openpyxl.load_workbook('personas.xlsx')
+            wb = openpyxl.load_workbook('G:\Proyecto final\Proyecto-Datos-y-algoritmo\intefaz\personas.xlsx')
             sheet = wb.active
         except FileNotFoundError:
             wb = Workbook()
@@ -50,7 +50,22 @@ class RegistroPersona:
         return tabla, len(self.personas)
 
 
-    #funcion para buscar una persona en el registro por codigo
+        #funcion para buscar una persona en el registro por codigo
+    def editar_persona(self, codigo, nueva_informacion):
+        for persona in self.personas:
+            if persona.codigo == codigo:
+                # Actualizar los datos de la persona con los nuevos valores
+                persona.nombre = nueva_informacion.get('nombre', persona.nombre)
+                persona.edad = nueva_informacion.get('edad', persona.edad)
+                persona.correo = nueva_informacion.get('correo', persona.correo)
+                persona.numero = nueva_informacion.get('numero', persona.numero)
+                persona.genero = nueva_informacion.get('genero', persona.genero)
+                persona.fecha_nacimiento = nueva_informacion.get('fecha_nacimiento', persona.fecha_nacimiento)
+                print(f"Datos de {persona.nombre} actualizados exitosamente.")
+                return
+        print(f"No se encontró a la persona con código {codigo} en el registro.")
+
+#funcion para buscar una persona en el registro por codigo
     def buscar_persona_por_codigo(self, codigo):
         #busca ña érspma por le codigo 
         personas_encontradas = [persona for persona in self.personas if persona.codigo == codigo]
@@ -62,56 +77,9 @@ class RegistroPersona:
                 persona_encontrada = persona_encontras
                 return persona_encontrada, len(personas_encontradas)
         else:
-            print(f"No se encontró a {codigo} en el registro.")
+            print(f"No se encontró a {codigo} en el registro.")
 
-    #funcion para buscar una persona en el registro por nombre
-    def buscar_persona_por_nombre(self, nombre):
-        wb = openpyxl.load_workbook('personas.xlsx')
-        sheet = wb.active
-        for row in sheet.iter_rows(values_only=True):
-            if row[0] == nombre:
-                print(f"Nombre: {row[0]}\nCodigo: {row[1]}\nEdad: {row[2]}\nCorreo: {row[3]}\nNúmero: {row[4]}\nGénero: {row[5]}\nFecha de Nacimiento: {row[6]}\n")
-                break
-        else:
-            print(f"No se encontró a {nombre} en el registro.")
 
-    def editar_persona(self, codigo, nueva_informacion):
-        persona_editada = None
-        for persona in self.personas:
-            if persona.codigo == codigo:
-                persona.nombre = nueva_informacion.get('nombre', persona.nombre)
-                persona.edad = nueva_informacion.get('edad', persona.edad)
-                persona.correo = nueva_informacion.get('correo', persona.correo)
-                persona.numero = nueva_informacion.get('numero', persona.numero)
-                persona.genero = nueva_informacion.get('genero', persona.genero)
-                persona.fecha_nacimiento = nueva_informacion.get('fecha_nacimiento', persona.fecha_nacimiento)
-                persona_editada = persona
-                break
-
-        if persona_editada:
-            # Guardar los cambios en el archivo Excel
-            wb = openpyxl.load_workbook('personas.xlsx')
-            sheet = wb.active
-            for row in sheet.iter_rows(values_only=True):
-                if row[1] == codigo:
-                    # Actualizar los valores en la hoja de cálculo
-                    row_editada = list(zip(*row))
-                    
-                    if len(row_editada) == 7:
-                        row_editada[2] = persona_editada.edad
-                        row_editada[3] = persona_editada.correo
-                        row_editada[4] = persona_editada.numero
-                        row_editada[5] = persona_editada.genero
-                        row_editada[6] = persona_editada.fecha_nacimiento
-                        
-                        row = row_editada
-                        break
-            wb.save('personas.xlsx')
-            print(f"Persona {codigo} editada exitosamente.")
-            
-        else:
-            print(f"No se encontró a {codigo} en el registro.")
-    
     #Funcion para extraer el email receptor de la base de datos todos
     def extraer_emails(self):
         wb = openpyxl.load_workbook('G:\Proyecto final\Proyecto-Datos-y-algoritmo\intefaz\personas.xlsx')

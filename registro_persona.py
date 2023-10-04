@@ -18,6 +18,9 @@ class RegistroPersona:
 
     #funcion para agregar una persona al registro
     def agregar_persona(self, persona):
+        if not persona.validar_fecha_nacimiento():
+            print("Fecha de nacimiento inválida.")
+            return
         try:
             wb = openpyxl.load_workbook('personas.xlsx')
             sheet = wb.active

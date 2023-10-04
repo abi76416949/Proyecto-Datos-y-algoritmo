@@ -1,3 +1,5 @@
+import datetime
+
 class Persona:
     def __init__(self, nombre, codigo, edad, correo, numero, genero, fecha_nacimiento):
         self.nombre = nombre
@@ -7,7 +9,6 @@ class Persona:
         self.genero = genero
         self.fecha_nacimiento = fecha_nacimiento
         self.correo = correo
-        Persona.persona = self
 
     def get_nombre(self):
         return self.nombre
@@ -43,16 +44,22 @@ class Persona:
         return self.fecha_nacimiento
 
     def set_fecha_nacimiento(self, fecha_nacimiento):
-        self.fecha_nacimiento = fecha_nacimiento
-    
+        if self.validar_fecha_nacimiento(fecha_nacimiento):
+            self.fecha_nacimiento = fecha_nacimiento
+        else:
+            raise ValueError("Fecha de nacimiento no válida")
+
     def get_correo(self):
         return self.correo
 
     def set_correo(self, correo):
         self.correo = correo
 
-    def validar_fecha_nacimiento(self):
-        dia, mes, anio = map(int, self.fecha_nacimiento.split('/')) # Asumiendo que la fecha está en formato dd/mm/yyyy
-        if dia > 31 or dia < 1 or mes > 12 or mes < 1 or anio < 1000 or anio > 9999:
+    @staticmethod
+    def validar_fecha_nacimiento(fecha_nacimiento):
+        try:
+            dia, mes, anio = map(int, fecha_nacimiento.split('/')) # Asumiendo que la fecha está en formato dd/mm/yyyy
+            datetime.datetime(anio, mes, dia) # Esto lanzará un error si la fecha es inválida
+            return True
+        except ValueError:
             return False
-        return True

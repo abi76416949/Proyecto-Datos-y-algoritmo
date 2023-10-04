@@ -56,4 +56,16 @@ class Persona:
         return self._fecha_nacimiento
 
     def set_fecha_nacimiento(self, fecha_nacimiento):
-        self._fecha_nacimiento = fecha_nacimiento
+        self.fecha_nacimiento = fecha_nacimiento
+    
+    def get_correo(self):
+        return self.correo
+
+    def set_correo(self, correo):
+        self.correo = correo
+
+    def validar_fecha_nacimiento(self):
+        dia, mes, anio = map(int, self.fecha_nacimiento.split('/')) # Asumiendo que la fecha está en formato dd/mm/yyyy
+        if dia > 31 or dia < 1 or mes > 12 or mes < 1 or anio < 1000 or anio > 9999:
+            return False
+        return True

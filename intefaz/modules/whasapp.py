@@ -34,7 +34,7 @@ class Automatizacion:
             return False
         return True
 
-    def enviar_mensaje(self, numero_telefono, nombre):
+    def enviar_mensaje(self, numero_telefono, mensaje):
         self.driver.get(f"https://web.whatsapp.com/send?phone={numero_telefono}")
         espera = True
         while espera:
@@ -47,7 +47,7 @@ class Automatizacion:
         time.sleep(1)
         wait = WebDriverWait(self.driver, 150)
         wait.until(EC.presence_of_element_located((By.TAG_NAME, 'footer')))
-        mensaje = f"Felicidades {nombre}, esperamos que tengas un excelente día"
+        mensaje = mensaje
         test = self.driver.find_element(By.TAG_NAME, 'footer')
         message_box = test.find_element(By.TAG_NAME, 'p')
         message_box.click()
@@ -58,8 +58,8 @@ class Automatizacion:
 
 
 #bot para enviar mensajes whatsap 
-    def bot_whatsapp(self, numero, ruta_imagen, nombre):
-        self.enviar_mensaje(numero, nombre)
+    def bot_whatsapp(self, numero, ruta_imagen, mensaje):
+        self.enviar_mensaje(numero,mensaje)
         self.enviar_imagen(ruta_imagen)
-
+        
         

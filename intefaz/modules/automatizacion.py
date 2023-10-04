@@ -4,15 +4,18 @@ import time
 import datetime
 from enviarCorreo import EnviadorDeCorreos
 from registro_persona import RegistroPersona
+from datetime import datetime
 
-class WhatsAppBot:
+
+class EnviadorDeWhatsApp:
     def __init__(self, archivo_db):
         self.db = BaseDeDatos(archivo_db)
         self.automatizacion = Automatizacion()  # Crea una instancia de Automatizacion
 
-    def enviar_mensajes(self):
+    def enviar_felicitacion_whatsapp(self, phone , nombre):
         # Obtener los datos de los destinatarios
         recipients = self.db.obtener_datos()
+
 
         # Enviar mensajes a cada destinatario
         for recipient in recipients:
@@ -22,31 +25,37 @@ class WhatsAppBot:
             self.automatizacion.bot_whatsapp(phone, ruta, nombre)  # Llama al método de Automatizacion
             time.sleep(3)
             print("saliendo del bucle")
-    def enviar_mensajes_condicionalmente(self):
-    # Obtener la fecha actual
-        fecha_actual = datetime.date.today()
-        
-        # Obtener los destinatarios
-        recipients = self.db.obtener_datos()
 
-        # Iterar a través de los destinatarios
+
+    def enviar_felicitaciones_cumpleaños(self):
+        ahora = datetime.now()
+        db = BaseDeDatos("G:\\Proyecto final\\Proyecto-Datos-y-algoritmo\\intefaz\\personas.xlsx")
+
+        recipients = db.obtener_datos()
+
         for recipient in recipients:
-            fecha_recipient = recipient['fecha_nacimiento']  # Supongamos que 'fecha' es el campo con la fecha en tus datos
-            print(fecha_actual)
-            print(fecha_recipient)
-            # Verificar si la fecha en los datos es igual a la fecha actual
-            if fecha_recipient == fecha_actual:
-                phone = recipient['numero']
-                nombre = recipient['nombre']
-                ruta = "G:\Proyecto final\Proyecto-Datos-y-algoritmo\images\logo.png"
-                
-                # Llamar al método de Automatizacion para enviar el mensaje
-                self.automatizacion.bot_whatsapp(phone, ruta, nombre)
-                
-                time.sleep(3)
-                print("Mensaje enviado a", nombre)
-            else:
-                print("Fecha en los datos no coincide con la fecha actual. Omitiendo.")
+            genero_recipient = recipient['genero']
+            nombre_recipient = recipient['nombre']
+            fecha_nacimiento = datetime.strptime(recipient['fecha_nacimiento'], '%d/%m/%Y')
+
+            if fecha_nacimiento.month == ahora.month and fecha_nacimiento.day == ahora.day:
+                # Verificar si es el cumpleaños y definir el mensaje
+                if genero_recipient == 'F':
+                    mensaje = "¡Feliz cumpleaños, {nombre}! 🎉 (Mensaje para mujeres)"
+                elif genero_recipient == 'M':
+                    mensaje = "¡Feliz cumpleaños, {nombre}! 🎉 (Mensaje para hombres)"
+                else:
+                    print(f"No se reconoce el género para {nombre_recipient}")
+
+                numero_telefono = recipient['numero']
+                mensaje_personalizado = mensaje.format(nombre=nombre_recipient)
+                print(f"Mensaje de cumpleaños preparado para {nombre_recipient}")
+
+        # Llama al método una sola vez después de preparar todos los mensajes
+        self.enviar_felicitacion_whatsapp(numero_telefono, mensaje_personalizado)
+
+        print("Saliendo del bucle")
+
 
 
 
@@ -101,7 +110,7 @@ def enviadorCorreos():
 
 # Crear una instancia de la clase WhatsAppBot
 archivo = "G:\Proyecto final\Proyecto-Datos-y-algoritmo\intefaz\personas.xlsx"
-bot = WhatsAppBot(archivo)
-bot.enviar_mensajes_condicionalmente()
+bot = EnviadorDeWhatsApp(archivo)
+bot.enviar_felicitaciones_cumpleaños()
 # Enviar mensajes a los destinatarios
 #bot.enviar_mensajes()

@@ -1,11 +1,14 @@
 from email.message import EmailMessage
 import ssl
 import smtplib
+from persona import Persona
 from base_de_datos import BaseDeDatos
+from registro_persona import RegistroPersona
 from datetime import datetime
 import time
 import random
 import string
+import pytz
 class EnviadorDeCorreos:
     def __init__(self, email_emisor, email_contrasena):
         self.email_emisor = email_emisor
@@ -41,14 +44,20 @@ class EnviadorDeCorreos:
 
     
     def programar_correo(self):
-        db = BaseDeDatos('personas.xlsx')
         while True:
-            ahora = datetime.now()
-            destinatarios = db.obtener_datos()
-            for destinatario in destinatarios:
-                fecha_nacimiento = datetime.strptime(destinatario['fecha_nacimiento'], '%d/%m/%Y')
-                if fecha_nacimiento.month == ahora.month and fecha_nacimiento.day == ahora.day:
-                    email_receptor = destinatario['correo']
-                    self.enviar_correo(email_receptor, "Feliz cumpleaños", "Feliz cumpleaños")
-                    print(f"Correo enviado a {email_receptor} en {ahora}")
-            time.sleep(60*60*24) # dormir durante un día
+            now = datetime.datetime.now(pytz.timezone('America/Lima'))
+            if now.hour == 22:  # Comprueba si son las 10 de la noche
+                registro = RegistroPersona()
+                personas = registro.obtener_personas()
+                for persona in personas:
+                    fecha_nacimiento = datetime.datetime.strptime(persona.fecha_nacimiento, "%d-%m-%Y")  # Asegúrate de que el formato de la fecha coincida con el de tus datos
+                    if (now.day == fecha_nacimiento.day) and (now.month == fecha_nacimiento.month):  # Comprueba si hoy es el cumpleaños de la persona
+                        email_receptor = persona.correo
+                        asunto = "Feliz cumpleaños"
+                        cuerpo = f"¡Feliz cumpleaños, {persona.nombre}!"
+                        self.enviar_correo(email_receptor, asunto, cuerpo)
+                        print(f"Correo enviado a {persona.nombre}")
+                time.sleep(3600)  # Duerme durante una hora antes de comprobar de nuevo
+            else:
+                time.sleep(60)  # Duerme durante un minuto antes de comprobar de nuevo
+         

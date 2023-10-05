@@ -3,10 +3,13 @@ from whasapp import Automatizacion  # Importa la clase Automatizacion
 import time
 import datetime
 from enviarCorreo import EnviadorDeCorreos
+from base_de_datos import BaseDeDatos
+from datetime import datetime
+
 
 class WhatsAppBot:
-    def __init__(self):
-        self.db = BaseDeDatos()
+    def __init__(self, archivo_db):
+        self.db = BaseDeDatos(archivo_db)
         self.automatizacion = Automatizacion()  # Crea una instancia de Automatizacion
 
     def enviar_mensajes(self):
@@ -53,9 +56,6 @@ class WhatsAppBot:
 
 
 
-
-
-
 def enviadorCorreos():
     # Definir asunto y cuerpo del correo
     
@@ -68,8 +68,8 @@ def enviadorCorreos():
     cuerpo = enviador_de_correos.mensaje_personalisado()
     recipients= db.obtener_datos()
 
-        # Enviar mensajes a cada destinatario
-    for recipient in recipients:
+    # Enviar mensajes a cada destinatario
+    """ for recipient in recipients:
         email_receptor = recipient['correo']
         ruta = "G:\Proyecto final\Proyecto-Datos-y-algoritmo\images\logo.png"
         try:
@@ -79,7 +79,8 @@ def enviadorCorreos():
         except Exception as e:
             print(f"Error al enviar correo a {email_receptor}: {str(e)}") 
         time.sleep(3)
-        print("saliendo del bucle")
+        print("saliendo del bucle") """
+        
     # Crear instancia de RegistroPersona para obtener los correos electrónicos
     #rp = RegistroPersona()
     
@@ -100,11 +101,11 @@ def enviadorCorreos():
 
 
 # Llamar a la función para enviar correos
-enviadorCorreos()
+#enviadorCorreos()
 
 # Crear una instancia de la clase WhatsAppBot
 
-# bot = WhatsAppBot()
-#bot.enviar_mensajes_condicionalmente()
+bot = EnviadorDeWhatsApp()
+bot.enviar_felicitaciones_cumpleaños()
 # Enviar mensajes a los destinatarios
 #bot.enviar_mensajes()

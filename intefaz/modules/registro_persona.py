@@ -8,7 +8,11 @@ from openpyxl import Workbook
 class RegistroPersona:
     #funcion para inicializar el registro
     def __init__(self):
+<<<<<<< HEAD
         self.bd = BaseDeDatos('G:\Proyecto final\Proyecto-Datos-y-algoritmo\intefaz\personas.xlsx')
+=======
+        self.bd = BaseDeDatos()
+>>>>>>> proyec2
         self.bd.cerrar()
         datos = self.bd.obtener_datos()
         if isinstance(datos, list) and all(isinstance(d, dict) for d in datos):
@@ -40,14 +44,6 @@ class RegistroPersona:
         else:
             print(f"No se encontró a {codigo} en el registro.")
 
-    #funcion para mostrar las personas del registro
-    def mostrar_personas(self):
-        tabless = []
-        for persona in self.personas:
-            tabless.append([persona.nombre, persona.codigo, persona.edad, persona.correo, persona.numero, persona.genero, persona.fecha_nacimiento])
-
-        tabla =  tabless 
-        return tabla, len(self.personas)
 
 
         #funcion para buscar una persona en el registro por codigo
@@ -66,6 +62,7 @@ class RegistroPersona:
         print(f"No se encontró a la persona con código {codigo} en el registro.")
 
 #funcion para buscar una persona en el registro por codigo
+<<<<<<< HEAD
     def buscar_persona_por_codigo(self, codigo):
         #busca ña érspma por le codigo 
         personas_encontradas = [persona for persona in self.personas if persona.codigo == codigo]
@@ -78,6 +75,9 @@ class RegistroPersona:
                 return persona_encontrada, len(personas_encontradas)
         else:
             print(f"No se encontró a {codigo} en el registro.")
+=======
+
+>>>>>>> proyec2
 
 
     #Funcion para extraer el email receptor de la base de datos todos

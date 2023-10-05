@@ -195,18 +195,12 @@ class MiApp(QtWidgets.QMainWindow):
 		genero = self.ui.lineEdit_6generoactualizar.text()
 		nacimiento = self.ui.lineEdit_7nacimientoactualizar.text()
 		nueva_informacion = {'nombre': nombre, 'edad': edad, 'correo': correo, 'numero': telefono, 'genero': genero, 'fecha_nacimiento': nacimiento}
-<<<<<<< HEAD
-		self.registro.editar_persona(codigo, nueva_informacion)
-		self.ui.label_20.setText("Persona editada exitosamente")
-	
-=======
 		try:
 			self.registro.editar_persona(codigo, nueva_informacion)
 			self.ui.label_actualizarverificacion.setText("Persona editada exitosamente")
 		except Exception as e:
 			self.ui.label_actualizarverificacion.setText("No se pudo editar la persona")
 			print(f"Error al editar la persona: {str(e)}")
->>>>>>> proyec2
 	def eliminar_persona(self):
 		codigo = self.ui.lineEdit_17ingresarcodigoeliminar.text()
 		try:

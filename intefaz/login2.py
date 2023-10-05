@@ -186,6 +186,7 @@ class MiApp(QtWidgets.QMainWindow):
 		else:
 			self.ui.label_actualizarverificacion.setText("Persona no encontrada")
 			print("Persona no encontrada")
+
 	def actualizar_informacin(self):
 		codigo = self.ui.lineEdit_9codigoactualizar.text()
 		nombre = self.ui.lineEdit_1nombreact.text()
@@ -201,6 +202,8 @@ class MiApp(QtWidgets.QMainWindow):
 		except Exception as e:
 			self.ui.label_actualizarverificacion.setText("No se pudo editar la persona")
 			print(f"Error al editar la persona: {str(e)}")
+	
+	
 	def eliminar_persona(self):
 		codigo = self.ui.lineEdit_17ingresarcodigoeliminar.text()
 		try:

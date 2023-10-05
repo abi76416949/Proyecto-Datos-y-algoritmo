@@ -153,7 +153,7 @@ class MiApp(QtWidgets.QMainWindow):
 	def mostrarTabla_buscar_persona(self):
 		codigo = self.ui.lineEdit_16ingresarcodigobuscar.text()
 		per_encon,num_personasEncontradas = self.registro.buscar_persona_por_codigo(codigo)
-
+		
 		# Obtener el número de filas de la persona encontrada
 		i = len(per_encon)
 		print("i es igual a:")

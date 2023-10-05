@@ -1,5 +1,5 @@
-from base_de_datos import BaseDeDatos
-from persona import Persona
+from modules.base_de_datos import BaseDeDatos
+from modules.persona import Persona
 import openpyxl
 from openpyxl import Workbook
 #from prettytable import PrettyTable
@@ -18,10 +18,7 @@ class RegistroPersona:
 
     #funcion para agregar una persona al registro
     def agregar_persona(self, persona):
-<<<<<<< Updated upstream:intefaz/modules/registro_persona.py
-=======
 
->>>>>>> Stashed changes:registro_persona.py
         try:
             wb = openpyxl.load_workbook('personas.xlsx')
             sheet = wb.active
@@ -79,7 +76,7 @@ class RegistroPersona:
         else:
             print(f"No se encontró a {nombre} en el registro.")
 
-<<<<<<< Updated upstream:intefaz/modules/registro_persona.py
+    #funcion para editar una persona en el registro
     def editar_persona(self, codigo, nueva_informacion):
         persona_editada = None
         for persona in self.personas:
@@ -130,55 +127,3 @@ class RegistroPersona:
     
     #funcion para extraer el email receptor segun la fecha del ordenador
     
-=======
-    def editar_persona_por_codigo(self, codigo):
-        # Buscar la persona por código
-        personas_encontradas = [persona for persona in self.personas if persona.codigo == codigo]
-        if personas_encontradas:
-            # Si se encontró la persona, seleccionar la primera (debería ser única ya que el código es único)
-            persona = personas_encontradas[0]
-
-            # Solicitar nuevos datos al usuario
-            print("Ingrese los nuevos datos de la persona (deje en blanco para mantener los actuales):")
-            nombre = input("Nombre y apellido: ")
-            edad = input("Edad: ")
-            numero = input("Número de teléfono: ")
-            genero = input("Genero(F/M): ")
-            fecha_nacimiento = input("Fecha de nacimiento(dd/mm/aaaa): ")
-            correo = input("Correo electrónico: ")
-
-            # Actualizar los datos de la persona
-            if nombre:
-                persona.set_nombre(nombre)
-            if edad:
-                persona.set_edad(int(edad))
-            if numero:
-                persona.set_numero(numero)
-            if genero:
-                persona.set_genero(genero)
-            if fecha_nacimiento:
-                persona.set_fecha_nacimiento(fecha_nacimiento)
-            if correo:
-                persona.set_correo(correo)
-            # Guardar los cambios en la base de datos
-            wb = openpyxl.load_workbook('personas.xlsx')
-            sheet = wb.active
-            for row in sheet.iter_rows():
-                if row[1].value == codigo:
-                    row[0].value = persona.nombre
-                    row[2].value = persona.edad
-                    row[3].value = persona.correo
-                    row[4].value = persona.numero
-                    row[5].value = persona.genero
-                    row[6].value = persona.fecha_nacimiento
-                    break
-            wb.save('personas.xlsx')
-
-            print("Datos de la persona actualizados exitosamente.")
-        else:
-            print(f"No se encontró a {codigo} en el registro.")
-
-            
-            
-
->>>>>>> Stashed changes:registro_persona.py

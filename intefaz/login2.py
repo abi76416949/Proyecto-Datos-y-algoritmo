@@ -5,8 +5,8 @@ from PyQt5.QtCore import QUrl, QPropertyAnimation, QEasingCurve,pyqtSignal
 from PyQt5 import QtGui 
 from login import *
 from PyQt5.QtGui import QDesktopServices
-from modules.registro_persona import RegistroPersona
 from modules.persona import Persona
+from modules.base_de_datos import BaseDeDatos as base_de_datos
 ## librerias para las tablas
 from PyQt5 import Qt
 from PyQt5.QtGui import QStandardItem, QStandardItemModel
@@ -65,7 +65,7 @@ class Login(QtWidgets.QMainWindow):
 		return False
 
 class MiApp(QtWidgets.QMainWindow):
-	registro = RegistroPersona()
+	registro = base_de_datos()
 	model = QStandardItemModel()
 	envi = EnviadorDeCorreos('trabajosgrupalesdelcole@gmail.com', 'dysa uxym osmb wuci')
 
@@ -150,7 +150,7 @@ class MiApp(QtWidgets.QMainWindow):
 		codigo = self.ui.lineEdit_17ingresarcodigoeliminar.text()
 		self.mostrar_tablas(codigo)
 
-	def actualizar_informacin(self):
+	def actualizar_información(self):
 		codigo = self.ui.lineEdit_9codigoactualizar.text()
 		nombre = self.ui.lineEdit_1nombreact.text()
 		edad = self.ui.lineEdit_2edadactualizar.text()
@@ -158,9 +158,17 @@ class MiApp(QtWidgets.QMainWindow):
 		telefono = self.ui.lineEdit_5telefonoactualizar.text()
 		genero = self.ui.lineEdit_6generoactualizar.text()
 		nacimiento = self.ui.lineEdit_7nacimientoactualizar.text()
-		nueva_informacion = {'nombre': nombre, 'edad': edad, 'correo': correo, 'numero': telefono, 'genero': genero, 'fecha_nacimiento': nacimiento}
+		nueva_informacion = {
+			'nombre': nombre,
+			'edad': edad,
+			'correo': correo,
+			'numero': telefono,
+			'genero': genero,
+			'fecha_nacimiento': nacimiento
+		}
 		self.registro.editar_persona(codigo, nueva_informacion)
 		self.ui.label_20.setText("Persona editada exitosamente")
+
 	
 	def eliminar_persona(self):
 		codigo = self.ui.lineEdit_17ingresarcodigoeliminar.text()

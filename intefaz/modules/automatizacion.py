@@ -3,7 +3,7 @@ from whasapp import Automatizacion  # Importa la clase Automatizacion
 import time
 import datetime
 from enviarCorreo import EnviadorDeCorreos
-from registro_persona import RegistroPersona
+from base_de_datos import BaseDeDatos
 from datetime import datetime
 
 

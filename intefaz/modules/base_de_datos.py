@@ -1,6 +1,6 @@
 import openpyxl
 from openpyxl import Workbook
-from modules.persona import Persona
+from persona import Persona
 
 #from prettytable import PrettyTable
 
